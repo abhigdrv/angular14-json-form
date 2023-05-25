@@ -1,0 +1,93 @@
+<div class="" *ngIf="jsonForm">
+  <div class="min-w-[400px]">
+    <form class="" [formGroup]="jsonForm" (ngSubmit)="onSubmit()">
+      <h2 class="text-2xl">{{ title }}</h2>
+      <p>{{ subTitle }}</p>
+      <div class="my-4">
+        <div class="grid grid-cols-12 gap-4">
+          <div *ngFor="let field of fields" [ngClass]="[
+              (field.filedWidth === null)?globalColumnClass:('col-span-'+12*field.filedWidth),
+              (field.customClass !== '')?field.customClass:''
+            ]">
+            <div *ngIf="field.type === 'checkbox'">
+              <label class="inline-flex items-center">
+                <input formControlName="{{field.name}}" type="checkbox" class=" rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" checked="" formControlName="name">
+                <span class="ml-2">Email me news and special offers</span>
+              </label>
+            </div>
+            <div *ngIf="field.type === 'date'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input formControlName="{{field.name}}" type="date" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+              </label>
+            </div>
+            <div *ngIf="field.type === 'file'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input formControlName="{{field.name}}" type="file" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+              </label>
+            </div>
+            <div *ngIf="field.type === 'number'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input formControlName="{{field.name}}" type="number" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+              </label>
+            </div>
+            <div *ngIf="field.type === 'password'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input formControlName="{{field.name}}" type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+              </label>
+            </div>
+            <div *ngIf="field.type === 'radio'">
+              <label class="inline-flex items-center">
+                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="option1">
+                <span class="ml-2">Option 1</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="option2">
+                <span class="ml-2">Option 2</span>
+              </label>
+            </div>
+            <div *ngIf="field.type === 'range'">
+              <p>Range input not supported right now!</p>
+            </div>
+            <div *ngIf="field.type === 'select'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <select formControlName="{{field.name}}" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                  <option>Corporate event</option>
+                  <option>Wedding</option>
+                  <option>Birthday</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </div>
+            <div *ngIf="field.type === 'submit'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input type="submit" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+              </label>
+            </div>
+            <div *ngIf="field.type === 'text'">
+              <label class="block">
+                <span class="text-gray-700">{{field.label}}</span>
+                <input type="text"
+                  class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  placeholder="" formControlName="{{field.name}}">
+              </label>            </div>
+            <div *ngIf="field.type === 'textarea'">
+              <label class="block">
+                <span class="text-gray-700">Additional details</span>
+                <textarea
+                  formControlName="{{field.name}}"
+                  class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  rows="3"></textarea>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
