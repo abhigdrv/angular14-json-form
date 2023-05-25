@@ -5,10 +5,13 @@
 ![image](https://github.com/abhigdrv/angular14-json-form/assets/52538014/c61cba48-5a33-445a-b935-943da2232200)
 
 # Documentation
-> Installing angular14-json-form
+> **Installing angular14-json-form**
 > npm i angular14-json-form
-> Adding in your component.ts file
-> ``` title = 'libraryValidator';
+> 
+> **Adding in your component.ts file**
+> 
+``` 
+  title = 'libraryValidator';
   fields:any = [
     {
       name: 'name',
@@ -254,13 +257,18 @@
   }
   fieldChangeHandler(val:any){
     console.log(val, 'field updated')
-  } ```
- > Adding in your component.html file
- > ``` <angular14-json-form
+  }
+  ```
+ > **Adding in your component.html file**
+ > 
+ ```
+  <angular14-json-form
           [title]="'Smart Form'"
           [subTitle]="'Form is build by using JSON'"
           [fields]="fields"
           [itemPerRow]="1"
           (submitHandler)="submitHandler($event)"
           (fieldChangeHandler)="fieldChangeHandler($event)"
-        ></angular14-json-form> ```
+  >
+  </angular14-json-form>
+  ```
