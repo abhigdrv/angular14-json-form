@@ -9,74 +9,67 @@
               (field.filedWidth === null)?globalColumnClass:('col-span-'+12*field.filedWidth),
               (field.customClass !== '')?field.customClass:''
             ]">
-            <div *ngIf="field.type === 'checkbox'">
+            <div *ngIf="field.type === 'checkbox' && field.isVisible">
               <label class="inline-flex items-center">
-                <input formControlName="{{field.name}}" type="checkbox" class=" rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" checked="" formControlName="name">
+                <input formControlName="{{field.name}}" type="checkbox" class=" rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" checked="" formControlName="name" (change)="onFieldValueChange(field, $event)">
                 <span class="ml-2">Email me news and special offers</span>
               </label>
             </div>
-            <div *ngIf="field.type === 'date'">
+            <div *ngIf="field.type === 'date' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="date" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <input formControlName="{{field.name}}" type="date" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" (change)="onFieldValueChange(field, $event)">
               </label>
             </div>
-            <div *ngIf="field.type === 'file'">
+            <div *ngIf="field.type === 'file' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="file" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+                <input formControlName="{{field.name}}" type="file" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
               </label>
             </div>
-            <div *ngIf="field.type === 'number'">
+            <div *ngIf="field.type === 'number' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="number" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+                <input formControlName="{{field.name}}" type="number" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
               </label>
             </div>
-            <div *ngIf="field.type === 'password'">
+            <div *ngIf="field.type === 'password' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+                <input formControlName="{{field.name}}" type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
               </label>
             </div>
-            <div *ngIf="field.type === 'radio'">
-              <label class="inline-flex items-center">
-                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="option1">
-                <span class="ml-2">Option 1</span>
-              </label>
-              <label class="inline-flex items-center">
-                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="option2">
-                <span class="ml-2">Option 2</span>
+            <div *ngIf="field.type === 'radio' && field.isVisible">
+              <label class="inline-flex items-center mr-2" *ngFor="let option of field.options">
+                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="{{option.value}}" (change)="onFieldValueChange(field, $event)">
+                <span class="ml-2">{{option.label}}</span>
               </label>
             </div>
-            <div *ngIf="field.type === 'range'">
+            <div *ngIf="field.type === 'range' && field.isVisible">
               <p>Range input not supported right now!</p>
             </div>
-            <div *ngIf="field.type === 'select'">
+            <div *ngIf="field.type === 'select' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
                 <select formControlName="{{field.name}}" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                  <option>Corporate event</option>
-                  <option>Wedding</option>
-                  <option>Birthday</option>
-                  <option>Other</option>
+                  <option *ngFor="let option of field.options" value="{{option.value}}">{{option.label}}</option>
                 </select>
               </label>
             </div>
-            <div *ngIf="field.type === 'submit'">
+            <div *ngIf="field.type === 'submit' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
                 <input type="submit" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
               </label>
             </div>
-            <div *ngIf="field.type === 'text'">
+            <div *ngIf="field.type === 'text' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">{{field.label}}</span>
                 <input type="text"
                   class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="" formControlName="{{field.name}}">
+                  placeholder="" formControlName="{{field.name}}" (change)="onFieldValueChange(field, $event)">
               </label>            </div>
-            <div *ngIf="field.type === 'textarea'">
+            <div *ngIf="field.type === 'textarea' && field.isVisible">
               <label class="block">
                 <span class="text-gray-700">Additional details</span>
                 <textarea

@@ -13,6 +13,7 @@ export class Angular14JsonFormComponent implements OnInit {
   @Input('itemPerRow') itemPerRow:number = 1;
   @Input('fields') fields:any = [];
   @Output('submitHandler') submitHandler = new EventEmitter<any>();
+  @Output('fieldChangeHandler') fieldChangeHandler = new EventEmitter<any>();
 
   jsonForm!: FormGroup;
 
@@ -26,7 +27,7 @@ export class Angular14JsonFormComponent implements OnInit {
       this.globalColumnClass = 'col-span-'+(12/this.itemPerRow)
     }
     this.fields.map((field:any) => {
-      form[field.name] = new FormControl(null)
+      form[field.name] = new FormControl(field.defaultValue)
     });
     this.jsonForm = new FormGroup(form)
   }
@@ -34,6 +35,13 @@ export class Angular14JsonFormComponent implements OnInit {
   onSubmit(){
     console.log(this.jsonForm.value)
     this.submitHandler.emit(this.jsonForm)
+  }
+
+  onFieldValueChange(field:any, value:any){
+    this.fieldChangeHandler.emit({
+      field:field,
+      value:value
+    })
   }
 
 }
