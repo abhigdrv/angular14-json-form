@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'angular14-json-form',
@@ -27,13 +27,12 @@ export class Angular14JsonFormComponent implements OnInit {
       this.globalColumnClass = 'col-span-'+(12/this.itemPerRow)
     }
     this.fields.map((field:any) => {
-      form[field.name] = new FormControl(field.defaultValue)
+      form[field.name] = this.createCustomFormControl('', field)
     });
     this.jsonForm = new FormGroup(form)
   }
 
   onSubmit(){
-    console.log(this.jsonForm.value)
     this.submitHandler.emit(this.jsonForm)
   }
 
@@ -42,6 +41,29 @@ export class Angular14JsonFormComponent implements OnInit {
       field:field,
       value:value
     })
+  }
+
+  createCustomFormControl(value: any, options: any): FormControl {
+    const { required, readonly, disabled, defaultValue } = options;
+    const control = new FormControl(value);
+
+    if (required) {
+      control.setValidators([Validators.required]);
+    }
+
+    if (readonly) {
+      control.disable();
+    }
+
+    if (disabled) {
+      control.disable();
+    }
+
+    if (defaultValue !== undefined) {
+      control.setValue(defaultValue);
+    }
+
+    return control;
   }
 
 }

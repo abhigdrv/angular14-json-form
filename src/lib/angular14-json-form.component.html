@@ -11,37 +11,37 @@
             ]">
             <div *ngIf="field.type === 'checkbox' && field.isVisible">
               <label class="inline-flex items-center">
-                <input formControlName="{{field.name}}" type="checkbox" class=" rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" checked="" formControlName="name" (change)="onFieldValueChange(field, $event)">
+                <input formControlName="{{field.name}}" type="checkbox" class=" rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" formControlName="name" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
                 <span class="ml-2">Email me news and special offers</span>
               </label>
             </div>
             <div *ngIf="field.type === 'date' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="date" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" (change)="onFieldValueChange(field, $event)">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input formControlName="{{field.name}}" type="date" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
               </label>
             </div>
             <div *ngIf="field.type === 'file' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="file" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input formControlName="{{field.name}}" type="file" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="{{field.placeholder}}" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
               </label>
             </div>
             <div *ngIf="field.type === 'number' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="number" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input formControlName="{{field.name}}" type="number" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="{{field.placeholder}}" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
               </label>
             </div>
             <div *ngIf="field.type === 'password' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input formControlName="{{field.name}}" type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" (change)="onFieldValueChange(field, $event)">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input formControlName="{{field.name}}" type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="{{field.placeholder}}" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
               </label>
             </div>
             <div *ngIf="field.type === 'radio' && field.isVisible">
               <label class="inline-flex items-center mr-2" *ngFor="let option of field.options">
-                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="{{option.value}}" (change)="onFieldValueChange(field, $event)">
+                <input formControlName="{{field.name}}" type="radio" class="form-radio text-indigo-600" value="{{option.value}}" (change)="onFieldValueChange(field, $event)" [ngClass]="field.customClass">
                 <span class="ml-2">{{option.label}}</span>
               </label>
             </div>
@@ -50,31 +50,42 @@
             </div>
             <div *ngIf="field.type === 'select' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <select formControlName="{{field.name}}" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <select formControlName="{{field.name}}" class=" block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" [ngClass]="field.customClass">
                   <option *ngFor="let option of field.options" value="{{option.value}}">{{option.label}}</option>
                 </select>
               </label>
             </div>
             <div *ngIf="field.type === 'submit' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input type="submit" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="">
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input
+                  type="submit"
+                  class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  placeholder="{{field.placeholder}}"
+                  [ngClass]="field.customClass"
+                >
               </label>
             </div>
             <div *ngIf="field.type === 'text' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">{{field.label}}</span>
-                <input type="text"
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
+                <input
+                  type="text"
                   class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="" formControlName="{{field.name}}" (change)="onFieldValueChange(field, $event)">
+                  placeholder="{{field.placeholder}}"
+                  formControlName="{{field.name}}"
+                  [ngClass]="field.customClass"
+                  (change)="onFieldValueChange(field, $event)"
+                >
               </label>            </div>
             <div *ngIf="field.type === 'textarea' && field.isVisible">
               <label class="block">
-                <span class="text-gray-700">Additional details</span>
+                <span class="text-gray-700">{{field.label}} <span *ngIf="field.required" class="text-rose-500">*</span></span>
                 <textarea
                   formControlName="{{field.name}}"
                   class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  [ngClass]="field.customClass"
                   rows="3"></textarea>
               </label>
             </div>
